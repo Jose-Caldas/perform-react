@@ -12,7 +12,7 @@ const AddProductToWishList = dynamic<AddProductToWishListProps>(
   }
 );
 
-interface ProductItemProps {
+export interface ProductItemProps {
   product: {
     id: number;
     price: number;

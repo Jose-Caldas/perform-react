@@ -1,4 +1,5 @@
 import { ProductItem } from "./ProductItem";
+import { List, ListRowRenderer } from "react-virtualized";
 
 interface SearchResultsProps {
   totalPrice: number;
@@ -16,18 +17,25 @@ export function SearchResults({
   results,
   addToWhishList,
 }: SearchResultsProps) {
+  const rowRenderer: ListRowRenderer = ({ index, key, style }) => {
+    return (
+      <div key={key} style={style}>
+        <ProductItem product={results[index]} addToWhishList={addToWhishList} />
+      </div>
+    );
+  };
+
   return (
     <div>
       <h2>{totalPrice}</h2>
-      {results.map((product) => {
-        return (
-          <ProductItem
-            key={product.id}
-            product={product}
-            addToWhishList={addToWhishList}
-          />
-        );
-      })}
+      <List
+        height={300}
+        rowHeight={30}
+        width={600}
+        overscanRowCount={5}
+        rowCount={results.length}
+        rowRenderer={rowRenderer}
+      />
     </div>
   );
 }
