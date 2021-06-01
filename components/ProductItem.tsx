@@ -6,12 +6,14 @@ interface ProductItemProps {
     price: number;
     title: string;
   };
+  addToWhishList: (id: number) => void;
 }
 
-function ProductItemComponent({ product }: ProductItemProps) {
+function ProductItemComponent({ product, addToWhishList }: ProductItemProps) {
   return (
     <div>
       {product.title} - <strong>{product.price}</strong>
+      <button onClick={() => addToWhishList(product.id)}>Add to list</button>
     </div>
   );
 }
